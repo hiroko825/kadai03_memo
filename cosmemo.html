@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/sample.css" />
+    <title>化粧品メモ</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>💄memo💄</h1>
+
+      <!-- メモの入力フォーム -->
+      <div class="input-container">
+        <label for="itemName">アイテム名:</label>
+        <select id="itemName" required>
+          <option value="" disabled selected>選択してください</option>
+          <!-- アイブロウ -->
+          <optgroup label="アイブロウ">
+            <option value="アイブロウペンシル">アイブロウペンシル</option>
+            <option value="パウダーアイブロウ">パウダーアイブロウ</option>
+            <option value="眉マスカラ">眉マスカラ</option>
+            <option value="その他アイブロウ">その他アイブロウ</option>
+          </optgroup>
+          <!-- 口紅・グロス・リップライナー -->
+          <optgroup label="口紅・グロス・リップライナー">
+            <option value="口紅">口紅</option>
+            <option value="リップグロス">リップグロス</option>
+            <option value="リップライナー">リップライナー</option>
+          </optgroup>
+          <!-- アイライナー -->
+          <optgroup label="アイライナー">
+            <option value="リキッドアイライナー">リキッドアイライナー</option>
+            <option value="ペンシルアイライナー">ペンシルアイライナー</option>
+            <option value="ジェルアイライナー">ジェルアイライナー</option>
+            <option value="その他アイライナー">その他アイライナー</option>
+          </optgroup>
+          <!-- アイシャドウ -->
+          <optgroup label="アイシャドウ">
+            <option value="パウダーアイシャドウ">パウダーアイシャドウ</option>
+            <option value="ジェル・クリームアイシャドウ">
+              ジェル・クリームアイシャドウ
+            </option>
+          </optgroup>
+          <!-- チーク -->
+          <optgroup label="チーク">
+            <option value="パウダーチーク">パウダーチーク</option>
+            <option value="ジェル・クリームチーク">
+              ジェル・クリームチーク
+            </option>
+          </optgroup>
+          <!-- マスカラ -->
+          <optgroup label="マスカラ">
+            <option value="マスカラ">マスカラ</option>
+            <option value="マスカラ下地・トップコート">
+              マスカラ下地・トップコート
+            </option>
+          </optgroup>
+        </select>
+
+        <label for="brandName">ブランド名（カタカナで入力してください）:</label>
+        <input
+          type="text"
+          id="brandName"
+          required
+          pattern="[\u30A1-\u30F6\s]*"
+        />
+
+        <label for="purchaseDate">購入日付:</label>
+        <input type="date" id="purchaseDate" required />
+
+        <label for="purchaseLocation">購入場所:</label>
+        <input type="text" id="purchaseLocation" required />
+
+        <label for="purchaseAmount">購入金額:</label>
+        <input type="number" id="purchaseAmount" required />
+
+        <label for="repurchase">再購入予定:</label>
+        <select id="repurchase">
+          <option value="あり">あり</option>
+          <option value="なし">なし</option>
+        </select>
+
+         <!-- メモを追加するボタン -->
+  <button onclick="addItem()">メモを追加する</button>
+
+  <!-- メモ追加のメッセージ -->
+  <p id="addMessage" style="display:none;">メモを追加しました。</p>
+
+  <!-- 保存したメモリスト -->
+  <div id="memoList"></div>
+
+    <script>
+        // メモを追加する関数
+        function addItem() {
+          const itemNameValue = document.getElementById('itemName').value;
+          const brandNameValue = document.getElementById('brandName').value;
+          const repurchaseValue = document.getElementById('repurchase').value;
+          const purchaseDateValue = document.getElementById('purchaseDate').value;
+          const purchaseLocationValue = document.getElementById('purchaseLocation').value;
+          const purchaseAmountValue = document.getElementById('purchaseAmount').value;
+
+          // メモの数を取得
+          const memoCount = document.querySelectorAll('.memo-sticker').length + 1;
+
+          const memoContent = `
+            <div class="memo-sticker">
+              <p>No: ${memoCount}</p>
+              <p>アイテム名: ${itemNameValue}</p>
+              <p>ブランド名: ${brandNameValue}</p>
+              <p>再購入予定: ${repurchaseValue}</p>
+              <p>購入日付: ${purchaseDateValue}</p>
+              <p>購入場所: ${purchaseLocationValue}</p>
+              <p>購入金額: ${purchaseAmountValue} 円</p>
+            </div>
+          `;
+
+          document.getElementById('memoList').insertAdjacentHTML('beforeend', memoContent);
+          resetForm(); // フォームをリセット
+
+          // メッセージを表示
+          document.getElementById('addMessage').style.display = 'block';
+          setTimeout(() => {
+            document.getElementById('addMessage').style.display = 'none';
+          }, 3000); // 3秒後にメッセージを非表示にする
+        }
+
+        // フォームをリセットする関数
+        function resetForm() {
+          document.getElementById('itemName').value = '';
+          document.getElementById('brandName').value = '';
+          document.getElementById('repurchase').value = 'あり';
+          document.getElementById('purchaseDate').value = '';
+          document.getElementById('purchaseLocation').value = '';
+          document.getElementById('purchaseAmount').value = '';
+        }
+    </script>
+  </body>
+</html>
