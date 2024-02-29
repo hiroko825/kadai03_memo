@@ -1,0 +1,88 @@
+body {
+    background-image: url('https://img.freepik.com/free-photo/close-up-of-a-white-marble-textured-wall_53876-139849.jpg?w=900&t=st=1709215531~exp=1709216131~hmac=1f767d6fb94764fdb9ece5c519371646efee62f43437e5337ce9da00a7617f47');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    background-color: rgba(255, 255, 255, 0.8); /* 背景の透明度を調整 */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%; /* コンテナの幅を調整 */
+    max-width: 600px; /* 最大幅を設定 */
+    box-sizing: border-box;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .input-container {
+    width: 500px;
+    margin: 60px auto 20px; /* メモリストから60px下に配置 */
+    text-align: left;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  #repurchase {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    display: block;
+    margin: 20px auto; /* 中央に配置 */
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  #memoList {
+    max-width: 800px;
+    margin: 20px auto; /* メモリストを中央に配置 */
+  }
+  
+  .memo-sticker {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    min-width: 200px;
+  }
+  
+  #addMessage {
+    text-align: center;
+    color: green;
+    margin: 10px 0;
+  }
+  
