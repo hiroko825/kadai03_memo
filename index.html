@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="sample.css" />
+    <link rel="stylesheet" href="css/sample.css" />
     <title>化粧品メモ</title>
   </head>
   <body>
@@ -82,15 +82,18 @@
         </select>
 
          <!-- メモを追加するボタン -->
-  <button onclick="addItem()">メモを追加する</button>
-
-  <!-- メモ追加のメッセージ -->
-  <p id="addMessage" style="display:none;">メモを追加しました。</p>
-
-  <!-- 保存したメモリスト -->
-  <div id="memoList"></div>
+         <button onclick="addItem()">メモを追加する</button>
+        <!-- メモ追加のメッセージ -->
+        <p id="addMessage" style="display:none;">メモを追加しました。</p>
+        <!-- 保存したメモリスト -->
+        <div id="memoList"></div>
 
     <script>
+      // ページ読み込み時に保存されたメモを表示
+      window.onload = function () {
+          displayStoredMemos();
+        };
+
         // メモを追加する関数
         function addItem() {
           const itemNameValue = document.getElementById('itemName').value;
@@ -123,6 +126,9 @@
           setTimeout(() => {
             document.getElementById('addMessage').style.display = 'none';
           }, 3000); // 3秒後にメッセージを非表示にする
+
+          // 保存されたメモを更新
+          updateStoredMemos();
         }
 
         // フォームをリセットする関数
@@ -133,6 +139,51 @@
           document.getElementById('purchaseDate').value = '';
           document.getElementById('purchaseLocation').value = '';
           document.getElementById('purchaseAmount').value = '';
+        }
+
+        // 保存されたメモをローカルストレージから取得して表示
+        function displayStoredMemos() {
+          const storedMemos = JSON.parse(localStorage.getItem('memos')) || [];
+          const memoListElement = document.getElementById('memoList');
+
+          storedMemos.forEach((memo, index) => {
+            const memoContent = `
+              <div class="memo-sticker">
+                <p>No: ${index + 1}</p>
+                <p>アイテム名: ${memo.itemName}</p>
+                <p>ブランド名: ${memo.brandName}</p>
+                <p>再購入予定: ${memo.repurchase}</p>
+                <p>購入日付: ${memo.purchaseDate}</p>
+                <p>購入場所: ${memo.purchaseLocation}</p>
+                <p>購入金額: ${memo.purchaseAmount} 円</p>
+              </div>
+            `;
+            memoListElement.insertAdjacentHTML('beforeend', memoContent);
+          });
+        }
+
+        // 現在のメモをローカルストレージに保存
+        function updateStoredMemos() {
+          const itemNameValue = document.getElementById('itemName').value;
+          const brandNameValue = document.getElementById('brandName').value;
+          const repurchaseValue = document.getElementById('repurchase').value;
+          const purchaseDateValue = document.getElementById('purchaseDate').value;
+          const purchaseLocationValue = document.getElementById('purchaseLocation').value;
+          const purchaseAmountValue = document.getElementById('purchaseAmount').value;
+
+          const newMemo = {
+            itemName: itemNameValue,
+            brandName: brandNameValue,
+            repurchase: repurchaseValue,
+            purchaseDate: purchaseDateValue,
+            purchaseLocation: purchaseLocationValue,
+            purchaseAmount: purchaseAmountValue,
+          };
+
+          const storedMemos = JSON.parse(localStorage.getItem('memos')) || [];
+          storedMemos.push(newMemo);
+
+          localStorage.setItem('memos', JSON.stringify(storedMemos));
         }
     </script>
   </body>
